@@ -69,25 +69,23 @@ public class StdPlot2D {
         if (xLower > 0 && xUpper > 0) {                                          // Kink needed.
             trueXLower = (xLower*canvasWidth - 25*xUpper) / (canvasWidth - 25);
             trueXUpper = xUpper;
-            StdDraw.setXscale(trueXLower, trueXUpper);
         }
         else if (xLower == 0 && xUpper > 0) {                                    // No kink needed.
             trueXLower = (xLower*canvasWidth - 15*xUpper) / (canvasWidth - 15);
             trueXUpper = xUpper;
-            StdDraw.setXscale(trueXLower, trueXUpper);
         }
         else if (xLower < 0 && xUpper == 0) {                                    // No kink needed.
             trueXLower = xLower;
-            trueXUpper = (xUpper*canvasWidth - 15*xLower) / (canvasWidth - 15);
-            StdDraw.setXscale(trueXLower, trueXUpper);
+            //trueXUpper = (xUpper*canvasWidth - 15*xLower) / (canvasWidth - 15);
+            trueXUpper = (xUpper*canvasWidth + 15*xLower) / (canvasWidth - 15);
             xRev = true;
         }
         else if (xLower < 0 && xUpper < 0) {                                     // Kink needed.
             trueXLower = xLower;
-            trueXUpper = (xUpper*canvasWidth - 25*xLower) / (canvasWidth - 25);
-            StdDraw.setXscale(trueXLower, trueXUpper);
+            trueXUpper = ((-xUpper*canvasWidth) + 25*xLower) / (canvasWidth - 25);
             xRev = true;
         }
+        StdDraw.setXscale(trueXLower, trueXUpper);
         if (yLower > 0 && yUpper > 0) {
             trueYLower = (yLower*canvasHeight - 25*yUpper) / (canvasHeight - 25);
             trueYUpper = yUpper;
@@ -96,26 +94,28 @@ public class StdPlot2D {
         }
         else if (yLower == 0 && yUpper > 0) {
             trueYLower = (yLower*canvasHeight - 15*yUpper) / (canvasHeight - 15);
-            trueYUpper = yUpper;            
-            StdDraw.setYscale(trueYLower, trueYUpper);
+            trueYUpper = yUpper;   
+            StdDraw.setYscale(trueYLower, trueYUpper);         
             StdDraw.line(trueXLower, yLower, trueXUpper, yLower);
         }
         else if (yLower < 0 && yUpper == 0) {
             trueYLower = yLower;
-            trueYUpper = (yUpper*canvasHeight - 15*yLower) / (canvasHeight - 15);        
-            StdDraw.setYscale(trueYLower, trueYUpper);   
+            trueYUpper = (yUpper*canvasHeight + 15*yLower) / (canvasHeight - 15);  
+            StdDraw.setYscale(trueYLower, trueYUpper); 
             StdDraw.line(trueXLower, yUpper, trueXUpper, yUpper);
         }
         else if (yLower < 0 && yUpper < 0) {
             trueYLower = yLower;
-            trueYUpper = (yUpper*canvasWidth - 25*xLower) / (canvasWidth - 25);
+            trueYUpper = (-yUpper*canvasHeight + 25*yLower) / (canvasHeight - 25);
             StdDraw.setYscale(trueYLower, trueYUpper);
             StdDraw.line(trueXLower, yUpper, trueXUpper, yUpper);
         }
         if (xRev) 
             StdDraw.line(xUpper, trueYLower, xUpper, trueYUpper);
         else
-            StdDraw.line(xLower, trueYLower, xLower, trueYUpper);
+            StdDraw.line(xLower, trueYLower, xLower, trueYUpper);           
+        //StdDraw.line(trueXLower, yLower, trueXUpper, yLower);
+
     }
     /**
      * Set the width represented by 1 major division along the x axis.
@@ -130,7 +130,7 @@ public class StdPlot2D {
      */
     public static void main(String[] args) {
         boolean[] providing = {false, false, true, true, true, true};
-        double[] values = {-100, 1000, 20, 400};
+        double[] values = {-200, -10, -400, -20};
         StdPlot2D plot = new StdPlot2D(providing, values);
     }
 }
