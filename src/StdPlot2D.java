@@ -77,11 +77,14 @@ public class StdPlot2D {
         yScale = (yUpper - yLower)/(canvasHeight);
         StdDraw.setFont(new Font("Sans-Serif", Font.PLAIN, 13));
         StdDraw.setPenRadius(0.002);
-        double textBoxWidth = 50;
-        double textBoxHeight = 13*1.5;
-        StdDraw.rectangle(xUpper + 90*xScale, yUpper - 49*yScale, textBoxWidth/2,13);
-        StdDraw.text(xUpper + 50*xScale, yUpper - 39*yScale, "x: ");
-        StdDraw.text(xUpper + 50*xScale, yUpper - 59*yScale, "y: ");
+        double textBoxWidth = 70;
+        double textBoxHeight = 13;
+        double coordinateBoxXOffset = 50;
+        double coordinateBoxYOffset = 49;
+        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+        StdDraw.text(xUpper + coordinateBoxXOffset*xScale, yUpper - coordinateBoxYOffset*yScale, "x : ");
+        StdDraw.text(xUpper + coordinateBoxXOffset*xScale, yUpper - 2*coordinateBoxYOffset*yScale, "y : ");
     }
     /**
      * Set the width represented by 1 major division along the x axis.
