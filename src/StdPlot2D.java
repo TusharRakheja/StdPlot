@@ -78,13 +78,39 @@ public class StdPlot2D {
         StdDraw.setFont(new Font("Sans-Serif", Font.PLAIN, 13));
         StdDraw.setPenRadius(0.002);
         double textBoxWidth = 70;
-        double textBoxHeight = 13;
-        double coordinateBoxXOffset = 50;
-        double coordinateBoxYOffset = 49;
-        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
-        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
-        StdDraw.text(xUpper + coordinateBoxXOffset*xScale, yUpper - coordinateBoxYOffset*yScale, "x : ");
-        StdDraw.text(xUpper + coordinateBoxXOffset*xScale, yUpper - 2*coordinateBoxYOffset*yScale, "y : ");
+        double textBoxHeight = 14;
+        double coordinateBoxYOffset = 41;
+        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+        StdDraw.rectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+        StdDraw.text(xUpper + (textBoxWidth - 10)*xScale, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, "x : ");
+        StdDraw.text(xUpper + (textBoxWidth - 10)*xScale, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, "y : ");
+        boolean quit = false;
+        double lastX = 0, lastY = 0, currentX, currentY, diffX, diffY;
+        while (!quit) {
+            
+            while (StdDraw.mousePressed() && StdDraw.mouseX() > canvasWidth && StdDraw.mouseY() > canvasHeight) {
+                quit = true;
+                break;
+            }
+            currentX = StdDraw.mouseX();
+            currentY = StdDraw.mouseY();
+            diffX = currentX - lastX;
+            diffY = currentY - lastY;
+            if ((diffX < minorXDiv && diffX > 0) || (diffX < 0 && diffX > -minorXDiv)) {
+                StdDraw.setPenColor(StdDraw.WHITE);
+                StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+                StdDraw.setPenColor(StdDraw.BLACK);                
+                StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, Double.toString(currentX));
+            }
+            if ((diffY < minorYDiv && diffY > 0) || (diffY < 0 && diffY > -minorYDiv)) { 
+                StdDraw.setPenColor(StdDraw.WHITE);
+                StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+                StdDraw.setPenColor(StdDraw.BLACK);
+                StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, Double.toString(currentY));
+            }
+            lastX = currentX;
+            lastY = currentY;
+        }
     }
     /**
      * Set the width represented by 1 major division along the x axis.
