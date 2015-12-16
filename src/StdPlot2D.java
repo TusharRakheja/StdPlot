@@ -87,29 +87,30 @@ public class StdPlot2D {
         boolean quit = false;
         double lastX = 0, lastY = 0, currentX, currentY, diffX, diffY;
         while (!quit) {
-            
-            while (StdDraw.mousePressed() && StdDraw.mouseX() > canvasWidth && StdDraw.mouseY() > canvasHeight) {
+            while (StdDraw.mousePressed() && StdDraw.mouseX() > (xUpper + 200*xScale) && StdDraw.mouseY() > yUpper) {
                 quit = true;
                 break;
             }
             currentX = StdDraw.mouseX();
             currentY = StdDraw.mouseY();
-            diffX = currentX - lastX;
-            diffY = currentY - lastY;
-            if ((diffX < minorXDiv && diffX > 0) || (diffX < 0 && diffX > -minorXDiv)) {
-                StdDraw.setPenColor(StdDraw.WHITE);
-                StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
-                StdDraw.setPenColor(StdDraw.BLACK);                
-                StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, Double.toString(currentX));
+            if (currentX <= xUpper) { 
+                diffX = currentX - lastX;
+                diffY = currentY - lastY;
+                if ((diffX < minorXDiv && diffX > 0) || (diffX < 0 && diffX > -minorXDiv)) {
+                    StdDraw.setPenColor(StdDraw.WHITE);
+                    StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+                    StdDraw.setPenColor(StdDraw.BLACK);                
+                    StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, String.format("%.2f", currentX));
+                }
+                if ((diffY < minorYDiv && diffY > 0) || (diffY < 0 && diffY > -minorYDiv)) { 
+                    StdDraw.setPenColor(StdDraw.WHITE);
+                    StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
+                    StdDraw.setPenColor(StdDraw.BLACK);
+                    StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, String.format("%.2f", currentY));
+                }
+                lastX = currentX;
+                lastY = currentY; 
             }
-            if ((diffY < minorYDiv && diffY > 0) || (diffY < 0 && diffY > -minorYDiv)) { 
-                StdDraw.setPenColor(StdDraw.WHITE);
-                StdDraw.filledRectangle(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, textBoxWidth*xScale/2, textBoxHeight*yScale/2);
-                StdDraw.setPenColor(StdDraw.BLACK);
-                StdDraw.text(xUpper + (textBoxWidth)*xScale + textBoxWidth*xScale/2, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, Double.toString(currentY));
-            }
-            lastX = currentX;
-            lastY = currentY;
         }
     }
     /**
