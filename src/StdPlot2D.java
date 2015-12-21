@@ -50,7 +50,7 @@ public final class StdPlot2D {
      *      <li> majorXDiv - The width of interval represented by a major X division. </li>
      *      <li> minorXDiv - The width of interval represented by a minor X division. </li>
      *      <li> majorYDiv - The width of interval represented by a major Y division. </li>
-     *      <li> majorYDiv - The width of interval represented by a minor Y division. </li>
+     *      <li> minorYDiv - The width of interval represented by a minor Y division. </li>
      * </ol>
      * @param provided provided[i] <=> The i<sup>th</sup> parameter has been provided.            
      */
