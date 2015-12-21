@@ -104,9 +104,9 @@ public final class StdPlot2D {
         StdDraw.text(xUpper + (textBoxWidth - 10)*xScale, yUpper - 2*coordinateBoxYOffset*yScale - textBoxHeight*yScale/2, "y : ");
     }
     /**
-     * Private graph loop.
+     * Public graph loop. To be called if one wants to explore the current plot(s).
      */
-    private void graphLoop() {
+    public void graphLoop() {
         boolean quit = false;
         double lastX = 0, lastY = 0, currentX, currentY, diffX, diffY;
         while (!quit) {
@@ -147,7 +147,6 @@ public final class StdPlot2D {
         for (int i = 0; i < x.length; i++) {
             point(x[i], y[i], str);
         }
-        graphLoop();
     }
     /**
      * Plots a point at x and y.
@@ -230,5 +229,6 @@ public final class StdPlot2D {
         //plot.points(x, y);
         for (double angle = 0; angle <= 2*Math.PI; angle += 0.01) 
             plot.point(350 + 50*Math.sin(angle), 200 + 40*Math.cos(angle), "dot");
+        plot.graphLoop();
     }
 }
