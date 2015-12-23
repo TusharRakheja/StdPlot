@@ -155,7 +155,7 @@ public final class StdPlot2D {
      * @param dotOrCircle Draw point as a dot or a circle.
      */
     public void point(double x, double y, String dotOrCircle) {
-        if (dotOrCircle.equals("dot"))
+        if (dotOrCircle.contains("dot"))
             StdDraw.point(x, y);
         else
             StdDraw.ellipse(x, y, pointCircleRadius*xScale, pointCircleRadius*yScale);
